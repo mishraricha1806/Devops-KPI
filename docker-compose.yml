@@ -1,0 +1,61 @@
+version: '3'
+services:
+  prometheus:
+    image: prom/prometheus:v2.18.1
+    container_name: prometheus
+    extra_hosts:
+      - "host.docker.internal:172.17.0.1"
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+
+  grafana:
+    build: ./grafana
+    extra_hosts:
+      - "host.docker.internal:172.17.0.1"
+    user: "0"
+    container_name: grafana
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./grafana/data:/var/lib/grafana
+      - ./grafana/dashboards:/etc/grafana/provisioning/dashboards
+      - ./grafana/datasources:/etc/grafana/provisioning/datasources
+
+  jira-cloud-exporter:
+    build: ./jira
+    container_name: jira-exporter
+    ports:
+      - 9092:9092
+    environment:
+      - JIRA_USERNAME=abhijit.kulkarni
+      - JIRA_PASSWORD=g14ssdooR
+      - JIRA_HOST=jira.cwc-apps.com
+      - JIRA_PORT=443
+      - JIRA_CONN_INSECURE=false
+      - JIRA_PROJECT_NAME=ESDN
+
+  jenkins-exporter:
+   build: ./jenkins
+   container_name: jenkins-exporter
+   ports:
+     - 9093:9093
+   environment:
+     - JENKINS_USER=abhijit.kulkarni
+     - JENKINS_PASSWORD=g14ssdooR
+     - JENKINS_HOST=jenkins.cwc-apps.com
+     - JENKINS_PORT=443
+     - JENKINS_CONN_INSECURE=false
+
+  splunk-exporter:
+   build: ./splunk
+   container_name: splunk-exporter
+   ports:
+     - 9091:9091
+   environment:
+     - SPLUNK_USER=abhijit.kulkarni
+     - SPLUNK_PASSWORD=g14ssdooR
+     - SPLUNK_HOST=10.255.228.201
+     - SPLUNK_PORT=8089
+     - SPLUNK_CONN_INSECURE=false
