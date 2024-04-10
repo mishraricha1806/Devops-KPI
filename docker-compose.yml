@@ -29,9 +29,9 @@ services:
     ports:
       - 9092:9092
     environment:
-      - JIRA_USERNAME=abhijit.kulkarni
-      - JIRA_PASSWORD=g14ssdooR
-      - JIRA_HOST=jira.cwc-apps.com
+      - JIRA_USERNAME=
+      - JIRA_PASSWORD=
+      - JIRA_HOST=
       - JIRA_PORT=443
       - JIRA_CONN_INSECURE=false
       - JIRA_PROJECT_NAME=ESDN
@@ -42,9 +42,9 @@ services:
    ports:
      - 9093:9093
    environment:
-     - JENKINS_USER=abhijit.kulkarni
-     - JENKINS_PASSWORD=g14ssdooR
-     - JENKINS_HOST=jenkins.cwc-apps.com
+     - JENKINS_USER=
+     - JENKINS_PASSWORD=
+     - JENKINS_HOST=
      - JENKINS_PORT=443
      - JENKINS_CONN_INSECURE=false
 
@@ -54,8 +54,8 @@ services:
    ports:
      - 9091:9091
    environment:
-     - SPLUNK_USER=abhijit.kulkarni
-     - SPLUNK_PASSWORD=g14ssdooR
+     - SPLUNK_USER=
+     - SPLUNK_PASSWORD=
      - SPLUNK_HOST=10.255.228.201
      - SPLUNK_PORT=8089
      - SPLUNK_CONN_INSECURE=false
